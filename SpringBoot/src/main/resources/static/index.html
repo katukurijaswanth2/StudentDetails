@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student CRUD App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Student Management System</h1>
+
+    <!-- ===== ADD / UPDATE FORM ===== -->
+    <div class="form-box">
+        <h2 id="form-title">Add New Student</h2>
+
+        <!-- Hidden field to store ID when updating -->
+        <input type="hidden" id="studentId">
+
+        <input type="text" id="name" placeholder="Enter Student Name">
+        <input type="text" id="email" placeholder="Enter Student Email">
+        <input type="text" id="department" placeholder="Enter Department">
+
+        <div class="form-buttons">
+            <button onclick="saveStudent()">Save Student</button>
+            <button onclick="clearForm()" class="btn-clear">Clear</button>
+        </div>
+    </div>
+
+    <!-- ===== STUDENT TABLE ===== -->
+    <div class="table-box">
+        <h2>All Students</h2>
+        <button onclick="loadStudents()" class="btn-load">Load / Refresh Students</button>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="studentTableBody">
+            <!-- Students will be loaded here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
