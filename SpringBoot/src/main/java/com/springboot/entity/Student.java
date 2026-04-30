@@ -19,17 +19,17 @@ public class Student {
     @Column(nullable = false)
     private String department;
 
-    // ✅ Default Constructor (required by JPA)
+    // Default Constructor (required by JPA)
     public Student() {}
 
-    // ✅ Parameterized Constructor
+    //Parameterized Constructor
     public Student(String name, String email, String department) {
         this.name = name;
         this.email = email;
         this.department = department;
     }
 
-    // ✅ Getters and Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -11,7 +11,7 @@ import java.util.List;
 // This class handles requests from browser/postman
 // and sends back data as JSON automatically
 @RestController
-
+@CrossOrigin(origins = "http://localhost:5173")
 // @RequestMapping means:
 // All URLs in this class start with /api/students
 // Example: http://localhost:8080/api/students
