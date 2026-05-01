@@ -1,26 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  --bg: #ffffff;
-  --surface: #18201b;
-  --surface2: #1f2a23;
-  --border: #2d3a32;
+  --bg: #111111;         /* main page background — dark black */
+  --surface: #1a1a1a;    /* table and card background */
+  --surface2: #222222;   /* table header and hover background */
+  --border: #2a2a2a;     /* border lines */
 
-  --accent: #22c55e;     /* green */
-  --accent2: #f97316;    /* orange */
+  --accent: #22c55e;     /* plain green */
+  --accent2: #f97316;    /* plain orange */
 
-  --text: #e7f5ec;
-  --text-muted: #8fa39a;
+  --text: #e7f5ec;       /* main text color — light so it shows on dark bg */
+  --text-muted: #8fa39a; /* secondary text color */
 
   --success: #22c55e;
   --danger: #ef4444;
 
   --radius: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
 }
 
+/* ── Base ── */
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
@@ -45,16 +49,23 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.header__brand { display: flex; align-items: center; gap: 1rem; }
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 .header__logo {
-  width: 48px; height: 48px;
+  width: 48px;
+  height: 48px;
   background: var(--accent);
   border-radius: 14px;
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   font-family: 'Syne', sans-serif;
-  font-size: 1.4rem; font-weight: 800;
-  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
 }
 
 .header__title {
@@ -71,16 +82,21 @@ body {
   text-transform: uppercase;
 }
 
-.header__stats { display: flex; gap: 2rem; }
+.header__stats {
+  display: flex;
+  gap: 2rem;
+}
 
-.stat { text-align: center; }
+.stat {
+  text-align: center;
+}
 
 .stat__num {
   display: block;
   font-family: 'Syne', sans-serif;
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--accent2); /* orange highlight */
+  color: var(--accent2);
 }
 
 .stat__label {
@@ -98,7 +114,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.search-wrap { position: relative; flex: 1; }
+.search-wrap {
+  position: relative;
+  flex: 1;
+}
 
 .search-icon {
   position: absolute;
@@ -116,8 +135,13 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  color: var(--text);
+  color: var(--text);          /* text you type is visible */
   font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.search::placeholder {
+  color: var(--text-muted);    /* placeholder text is visible */
 }
 
 .search:focus {
@@ -133,11 +157,13 @@ body {
   cursor: pointer;
   font-size: 0.88rem;
   font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
 }
 
+/* Add Student button — solid green, white text, always visible */
 .btn--primary {
   background: var(--accent);
-  color: #fff;
+  color: #ffffff;
 }
 
 .btn--primary:hover {
@@ -150,20 +176,36 @@ body {
   border: 1px solid var(--border);
 }
 
+/* Edit button — solid green, white text */
 .btn--edit {
-  background: rgba(34,197,94,0.1);
-  color: var(--accent);
-  border: 1px solid rgba(34,197,94,0.3);
+  background: #22c55e;
+  color: #ffffff;
+  border: none;
   font-size: 0.82rem;
   padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
 }
 
+.btn--edit:hover {
+  background: #16a34a;
+}
+
+/* Delete button — solid red, white text */
 .btn--delete {
-  background: rgba(239,68,68,0.1);
-  color: var(--danger);
-  border: 1px solid rgba(239,68,68,0.3);
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
   font-size: 0.82rem;
   padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn--delete:hover {
+  background: #dc2626;
 }
 
 /* ── Table ── */
@@ -174,7 +216,10 @@ body {
   overflow: hidden;
 }
 
-.table { width: 100%; border-collapse: collapse; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
 .table thead tr {
   background: var(--surface2);
@@ -184,40 +229,69 @@ body {
 .table th {
   padding: 0.85rem 1.2rem;
   text-align: left;
-  font-family: 'Syne';
+  font-family: 'Syne', sans-serif;
   font-size: 0.72rem;
   color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
+/* each table row — text is always visible */
+.table td {
+  padding: 0.9rem 1.2rem;
+  color: var(--text);          /* this was missing — caused invisible text */
+  font-size: 0.9rem;
+}
+
+/* hover row gets slightly lighter background */
 .table__row:hover {
   background: var(--surface2);
 }
 
-.table td { padding: 0.9rem 1.2rem; }
-
+/* student name and avatar side by side */
 .student-cell {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
+/* circle with initials */
 .avatar {
   width: 36px;
   height: 36px;
   border-radius: 10px;
   display: grid;
   place-items: center;
-  background: var(--accent2); /* orange */
-  color: #fff;
+  color: #ffffff;
   font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
+.student-name {
+  color: var(--text);
+}
+
+/* email text — slightly muted but still readable */
+.table__email {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* department badge — solid color set via inline style in JSX */
 .badge {
   padding: 0.3rem 0.7rem;
   border-radius: 6px;
   font-size: 0.78rem;
-  background: rgba(249,115,22,0.15);
-  color: var(--accent2);
+  font-weight: 500;
+  color: #ffffff;              /* white text on colored badge */
+  white-space: nowrap;
+}
+
+/* edit + delete buttons sit side by side */
+.actions {
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* ── Empty State ── */
@@ -227,6 +301,12 @@ body {
   color: var(--text-muted);
 }
 
+.empty__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* loading spinner */
 .spinner {
   width: 36px;
   height: 36px;
@@ -245,9 +325,10 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.65);
   display: grid;
   place-items: center;
+  z-index: 100;
 }
 
 .modal {
@@ -259,12 +340,20 @@ body {
   padding: 1.5rem;
 }
 
+/* input fields inside modal */
 .input {
+  width: 100%;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.7rem;
-  color: var(--text);
+  color: var(--text);          /* text you type is visible */
+  font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
 }
 
 .input:focus {
@@ -279,14 +368,19 @@ body {
   right: 1rem;
   padding: 0.8rem 1.2rem;
   border-radius: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 200;
 }
 
 .toast--success {
   background: #052e1b;
-  color: var(--success);
+  color: #22c55e;
 }
 
 .toast--error {
-  background: #ffffff;
-  color: var(--danger);
+  background: #2a0a0a;
+  color: #ef4444;
 }

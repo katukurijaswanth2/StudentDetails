@@ -21,8 +21,6 @@ export default function App() {
   // ===== TOAST FUNCTION =====
   const showToast = (message, type = "success") => {
     setToast({ message, type });
-
-    // remove toast after 3 sec
     setTimeout(() => {
       setToast(null);
     }, 3000);
@@ -40,7 +38,6 @@ export default function App() {
     setLoading(false);
   };
 
-  // run once when page loads
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -49,16 +46,12 @@ export default function App() {
   const handleSave = async (formData) => {
     try {
       if (editingStudent) {
-        // update existing student
         await updateStudent(editingStudent.id, formData);
         showToast("Student updated successfully!");
       } else {
-        // create new student
         await createStudent(formData);
         showToast("Student created successfully!");
       }
-
-      // close modal and refresh data
       setModalOpen(false);
       setEditingStudent(null);
       fetchStudents();
@@ -77,7 +70,6 @@ export default function App() {
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this student?");
     if (!confirmDelete) return;
-
     try {
       await deleteStudent(id);
       showToast("Student deleted");
@@ -94,10 +86,11 @@ export default function App() {
   };
 
   // ===== SEARCH FILTER =====
-  const filtered = students.filter((s) =>
-    s.name.toLowerCase().includes(search.toLowerCase()) ||
-    s.email.toLowerCase().includes(search.toLowerCase()) ||
-    s.department.toLowerCase().includes(search.toLowerCase())
+  const filtered = students.filter(
+    (s) =>
+      s.name.toLowerCase().includes(search.toLowerCase()) ||
+      s.email.toLowerCase().includes(search.toLowerCase()) ||
+      s.department.toLowerCase().includes(search.toLowerCase())
   );
 
   // ===== UI =====
@@ -127,7 +120,6 @@ export default function App() {
             <span className="stat__num">{students.length}</span>
             <span className="stat__label">Total</span>
           </div>
-
           <div className="stat">
             <span className="stat__num">
               {[...new Set(students.map((s) => s.department))].length}
