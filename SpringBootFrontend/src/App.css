@@ -286,6 +286,7 @@ body {
   font-weight: 500;
   color: #ffffff;              /* white text on colored badge */
   white-space: nowrap;
+  min-width: 100px;
 }
 
 /* edit + delete buttons sit side by side */
