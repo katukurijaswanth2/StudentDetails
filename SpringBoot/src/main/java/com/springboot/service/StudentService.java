@@ -14,17 +14,17 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    // ✅ CREATE - Save new student
+    // CREATE - Save new student
     public Student createStudent(Student student) {
         return studentRepository.save(student);
     }
 
-    // ✅ READ ALL - Get all students
+    //  READ ALL - Get all students
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    // ✅ READ ONE - Get student by ID
+    //  READ ONE - Get student by ID
     public Student getStudentById(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isPresent()) {
@@ -34,7 +34,7 @@ public class StudentService {
         }
     }
 
-    // ✅ UPDATE - Update existing student
+    //  UPDATE - Update existing student
     public Student updateStudent(Long id, Student updatedStudent) {
         Student existing = getStudentById(id); // Fetch existing
         existing.setName(updatedStudent.getName());
@@ -43,7 +43,7 @@ public class StudentService {
         return studentRepository.save(existing); // Save updated
     }
 
-    // ✅ DELETE - Delete student by ID
+    //  DELETE - Delete student by ID
     public String deleteStudent(Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
