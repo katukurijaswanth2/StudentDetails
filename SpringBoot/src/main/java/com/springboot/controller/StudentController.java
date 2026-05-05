@@ -7,38 +7,38 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RestController means:
-// This class handles requests from browser/postman
-// and sends back data as JSON automatically
+/**
+ * REST Controller for managing Student CRUD operations.
+ *
+ * This class handles HTTP requests from the browser or Postman
+ * and sends back data as JSON automatically.
+ * It communicates with the StudentService layer to perform
+ * business logic and interact with the database.
+ *
+ * Base URL : http://localhost:8080/api/students
+ * Frontend : https://student-details-nine-pearl.vercel.app
+ *
+ * @author  Jaswanth Katukuri
+ * @version 1.0
+ * @since   2026-05-03
+ */
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173")
-//to
-//@CrossOrigin(origins = "*")
 @CrossOrigin(origins = {
         "http://localhost:5173",
         "https://student-details-nine-pearl.vercel.app"
 })
-// @RequestMapping means:
-// All URLs in this class start with /api/students
-// Example: http://localhost:8080/api/students
 @RequestMapping("/api/students")
-
 public class StudentController {
 
-    // @Autowired means:
-    // Spring will automatically create and give us
+    // Spring will automatically create and inject
     // the StudentService object — we don't create it manually
     @Autowired
     private StudentService studentService;
 
 
     // ==================== CREATE ====================
-    // @PostMapping means: this method runs when someone
-    // sends a POST request to http://localhost:8080/api/students
-    //
-    // @RequestBody means:
-    // Take the JSON data sent in the request
-    // and convert it into a Student object automatically
+    // Runs when POST request is sent to /api/students
+    // @RequestBody converts incoming JSON → Student object
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
@@ -46,10 +46,8 @@ public class StudentController {
 
 
     // ==================== READ ALL ====================
-    // @GetMapping means: this method runs when someone
-    // sends a GET request to http://localhost:8080/api/students
-    //
-    // List<Student> means: we are returning multiple students
+    // Runs when GET request is sent to /api/students
+    // Returns a list of all students as JSON
     @GetMapping
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
@@ -57,12 +55,9 @@ public class StudentController {
 
 
     // ==================== READ ONE ====================
-    // @GetMapping("/{id}") means: this method runs when someone
-    // sends a GET request to http://localhost:8080/api/students/1
-    //
-    // @PathVariable means:
-    // Take the {id} from the URL and give it to us as a variable
-    // Example URL: /api/students/1  → id = 1
+    // Runs when GET request is sent to /api/students/{id}
+    // @PathVariable takes {id} from URL → gives it as a variable
+    // Example: /api/students/1 → id = 1
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable Long id) {
         return studentService.getStudentById(id);
@@ -70,12 +65,8 @@ public class StudentController {
 
 
     // ==================== UPDATE ====================
-    // @PutMapping means: this method runs when someone
-    // sends a PUT request to http://localhost:8080/api/students/1
-    //
-    // We need two things:
-    // 1. id        → from the URL      (@PathVariable)
-    // 2. student   → from the body     (@RequestBody)
+    // Runs when PUT request is sent to /api/students/{id}
+    // Needs: id (from URL) + student data (from request body)
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id,
                                  @RequestBody Student student) {
@@ -84,11 +75,8 @@ public class StudentController {
 
 
     // ==================== DELETE ====================
-    // @DeleteMapping means: this method runs when someone
-    // sends a DELETE request to http://localhost:8080/api/students/1
-    //
-    // We return a simple String message like
-    // "Student deleted successfully"
+    // Runs when DELETE request is sent to /api/students/{id}
+    // Returns a success message like "Student deleted successfully"
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable Long id) {
         return studentService.deleteStudent(id);
