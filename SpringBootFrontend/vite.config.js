@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [ tailwindcss(),react()],
    server: {
     port: 5173,
-    strictPort: true  // ← This will STOP vite instead of switching ports
+    // strictPort: true  // ← This will STOP vite instead of switching ports
   }
 })

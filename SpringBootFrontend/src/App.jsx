@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import StudentModal from "./components/StudentModel";
+
 import StudentTable from "./components/StudentTable";
-import {
-  getAllStudents,
-  createStudent,
-  updateStudent,
-  deleteStudent,
-} from "./api/studentApi";
+import { Header } from "./components/Header";
+import { Toolbar } from "./components/Toolbar";
+import { Toast } from "./components/Toast";
+import { EmptyState } from "./components/EmptyState";
+import { StatCard } from "./components/StatCard";
+import { getAllStudents, createStudent, updateStudent, deleteStudent } from "./api/studentApi";
 import "./App.css";
 
 export default function App() {
-  // ===== STATES =====
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,31 +18,24 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [search, setSearch] = useState("");
 
-  // ===== TOAST FUNCTION =====
   const showToast = (message, type = "success") => {
     setToast({ message, type });
-    setTimeout(() => {
-      setToast(null);
-    }, 3000);
+    setTimeout(() => setToast(null), 3000);
   };
 
-  // ===== FETCH STUDENTS =====
   const fetchStudents = async () => {
     setLoading(true);
     try {
       const response = await getAllStudents();
       setStudents(response.data);
-    } catch (error) {
+    } catch {
       showToast("Failed to load students", "error");
     }
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchStudents();
-  }, []);
+  useEffect(() => { fetchStudents(); }, []);
 
-  // ===== SAVE (ADD OR UPDATE) =====
   const handleSave = async (formData) => {
     try {
       if (editingStudent) {
@@ -55,131 +48,52 @@ export default function App() {
       setModalOpen(false);
       setEditingStudent(null);
       fetchStudents();
-    } catch (error) {
+    } catch {
       showToast("Something went wrong", "error");
     }
   };
 
-  // ===== EDIT =====
-  const handleEdit = (student) => {
-    setEditingStudent(student);
-    setModalOpen(true);
-  };
-
-  // ===== DELETE =====
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Delete this student?");
-    if (!confirmDelete) return;
-    try {
-      await deleteStudent(id);
-      showToast("Student deleted");
-      fetchStudents();
-    } catch (error) {
-      showToast("Failed to delete student", "error");
-    }
-  };
-
-  // ===== ADD BUTTON =====
-  const handleAdd = () => {
-    setEditingStudent(null);
-    setModalOpen(true);
-  };
-
-  // ===== SEARCH FILTER =====
-  const filtered = students.filter(
-    (s) =>
-      s.name.toLowerCase().includes(search.toLowerCase()) ||
-      s.email.toLowerCase().includes(search.toLowerCase()) ||
-      s.department.toLowerCase().includes(search.toLowerCase())
+  const filtered = students.filter((s) =>
+    s.name.toLowerCase().includes(search.toLowerCase()) ||
+    s.email.toLowerCase().includes(search.toLowerCase()) ||
+    s.department.toLowerCase().includes(search.toLowerCase())
   );
 
-  // ===== UI =====
+  const totalDepts = [...new Set(students.map((s) => s.department))].length;
+
   return (
     <div className="app">
+      <Toast toast={toast} />
 
-      {/* TOAST MESSAGE */}
-      {toast && (
-        <div className={`toast toast--${toast.type}`}>
-          <span>{toast.type === "success" ? "✓" : "✕"}</span>
-          {toast.message}
-        </div>
-      )}
+      <Header totalStudents={students.length} totalDepts={totalDepts} />
 
-      {/* HEADER */}
-      <header className="header">
-        <div className="header__brand">
-          <div className="header__logo">S</div>
-          <div>
-            <h1 className="header__title">StudentHub</h1>
-            <p className="header__sub">Management System</p>
-          </div>
-        </div>
+      <Toolbar
+        search={search}
+        onSearchChange={setSearch}
+        onAdd={() => { setEditingStudent(null); setModalOpen(true); }}
+      />
 
-        <div className="header__stats">
-          <div className="stat">
-            <span className="stat__num">{students.length}</span>
-            <span className="stat__label">Total</span>
-          </div>
-          <div className="stat">
-            <span className="stat__num">
-              {[...new Set(students.map((s) => s.department))].length}
-            </span>
-            <span className="stat__label">Depts</span>
-          </div>
-        </div>
-      </header>
-
-      {/* TOOLBAR */}
-      <div className="toolbar">
-        <div className="search-wrap">
-          <span className="search-icon">⌕</span>
-          <input
-            className="search"
-            placeholder="Search by name, email or department…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-
-        <button className="btn btn--primary" onClick={handleAdd}>
-          + Add Student
-        </button>
-      </div>
-
-      {/* MAIN CONTENT */}
       <main className="main">
-        {loading ? (
-          <div className="empty">
-            <div className="spinner" />
-            <p>Loading students…</p>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="empty">
-            <div className="empty__icon">🎓</div>
-            <p>
-              {search
-                ? "No students match your search."
-                : "No students yet. Add your first one!"}
-            </p>
-          </div>
+        {loading || filtered.length === 0 ? (
+          <EmptyState search={search} loading={loading} />
         ) : (
           <StudentTable
             students={filtered}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
+            onEdit={(s) => { setEditingStudent(s); setModalOpen(true); }}
+            onDelete={async (id) => {
+              if (!window.confirm("Delete this student?")) return;
+              try { await deleteStudent(id); showToast("Student deleted"); fetchStudents(); }
+              catch { showToast("Failed to delete student", "error"); }
+            }}
           />
         )}
       </main>
 
-      {/* MODAL */}
       {modalOpen && (
         <StudentModal
           student={editingStudent}
           onSave={handleSave}
-          onClose={() => {
-            setModalOpen(false);
-            setEditingStudent(null);
-          }}
+          onClose={() => { setModalOpen(false); setEditingStudent(null); }}
         />
       )}
     </div>
