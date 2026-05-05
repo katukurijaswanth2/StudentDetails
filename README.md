@@ -25,7 +25,7 @@ A full-stack web application to manage student records efficiently. This system 
 ## 📸 Project Preview
 
 <p align="center">
-  <img src="SpringBootFrontend/src/assets/database.png" alt="Database" width="500" />
+  <img src="SpringBootFrontend/src/assets/preview.png" alt="Database" width="500" />
 </p>
 
 ---
