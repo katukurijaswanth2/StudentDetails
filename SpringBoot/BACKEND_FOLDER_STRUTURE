@@ -1,0 +1,43 @@
+
+Root path: d:\SpringBoot\SpringBoot
+
+────────────────────────────────────────────────────────────────────────────────
+
+├── 📁 .mvn/
+│   └── 📁 wrapper/
+│       └── 📄 maven-wrapper.properties
+├── 📁 src/
+│   ├── 📁 main/
+│   │   ├── 📁 java/
+│   │   │   └── 📁 com/
+│   │   │       └── 📁 springboot/
+│   │   │           ├── 📁 controller/
+│   │   │           │   └── ☕ StudentController.java
+│   │   │           ├── 📁 entity/
+│   │   │           │   └── ☕ Student.java
+│   │   │           ├── 📁 repository/
+│   │   │           │   └── ☕ StudentRepository.java
+│   │   │           ├── 📁 service/
+│   │   │           │   └── ☕ StudentService.java
+│   │   │           └── ☕ Application.java
+│   │   └── 📁 resources/
+│   │       ├── 📁 static/
+│   │       │   ├── 🌐 index.html
+│   │       │   ├── 📄 script.js
+│   │       │   └── 🎨 style.css
+│   │       ├── 📁 templates/
+│   │       └── 📄 application.properties
+│   └── 📁 test/
+│       └── 📁 java/
+│           └── 📁 com/
+│               └── 📁 springboot/
+│                   ├── 📁 controller/
+│                   │   └── ☕ StudentControllerTest.java
+│                   └── ☕ ApplicationTests.java
+├── ⚙️ .gitattributes
+├── ⚙️ .gitignore
+├── 📄 mvnw
+├── 📄 mvnw.cmd
+└── ⚙️ pom.xml
+
+────────────────────────────────────────────────────────────────────────────────

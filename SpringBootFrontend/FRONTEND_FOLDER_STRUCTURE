@@ -1,0 +1,41 @@
+File Tree: SpringBootFrontend
+Root path: d:\SpringBoot\SpringBootFrontend
+
+────────────────────────────────────────────────────────────────────────────────
+
+├── 📁 public/
+│   ├── 🖼️ favicon.svg
+│   └── 🖼️ icons.svg
+├── 📁 src/
+│   ├── 📁 api/
+│   │   └── 📄 studentApi.js
+│   ├── 📁 assets/
+│   │   ├── 🖼️ config-js.png
+│   │   ├── 🖼️ database.png
+│   │   ├── 🖼️ hero.png
+│   │   ├── 🖼️ preview.png
+│   │   ├── 🖼️ react.svg
+│   │   └── 🖼️ vite.svg
+│   ├── 📁 components/
+│   │   ├── 📄 EmptyState.jsx
+│   │   ├── 📄 Header.jsx
+│   │   ├── 📄 StatCard.jsx
+│   │   ├── 📄 StudentModel.jsx
+│   │   ├── 📄 StudentTable.jsx
+│   │   ├── 📄 Toast.jsx
+│   │   └── 📄 Toolbar.jsx
+│   ├── 🎨 App.css
+│   ├── 📄 App.jsx
+│   ├── 📄 a
+│   ├── 🎨 index.css
+│   └── 📄 main.jsx
+├── ⚙️ .gitignore
+├── 📝 README.md
+├── 📄 eslint.config.js
+├── 🌐 index.html
+├── ⚙️ package-lock.json
+├── ⚙️ package.json
+├── ⚙️ vercel.json
+└── 📄 vite.config.js
+
+────────────────────────────────────────────────────────────────────────────────

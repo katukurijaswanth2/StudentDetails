@@ -10,7 +10,7 @@ const DEPARTMENTS = [
   "Other",
 ];
 
-export default function StudentModal({ student, onSave, onClose }) {
+export const StudentModal=({ student, onSave, onClose })=> {
   const [form, setForm] = useState({ name: "", email: "", department: "" });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
